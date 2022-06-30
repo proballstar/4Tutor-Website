@@ -2,6 +2,8 @@ import React, { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter, NextRouter } from 'next/router'
+import { routes } from './Navbar.routes'
+import { styles } from './Navbar.styles'
 
 export default function Navbar() {
 
@@ -23,15 +25,22 @@ export default function Navbar() {
 				<div className="flex justify-between">
 					<div className="flex space-x-7">
 						<div>
-							<Link href='/' className="flex items-center py-4 px-2 font-semibold text-gray-500 text-lg">
+							<Link href='/' className="flex items-center py-2 px-2 font-semibold text-gray-500 text-lg">
 								4Tutor 
 							</Link>
 						</div>
 						<div className="hidden md:flex items-center space-x-1">
-							<Link href="/contact" className={`py-4 px-2 ${router.pathname == '/contact' ? 'text-green-500 border-b-4 border-green-500 font-semibold' : 'text-gray-500 font-semibold' }`}>Contact</Link>
+							{routes.map((values, index) => {
+								return (
+									<Link key={`navigator-${index}`} href={values.route} className={router.pathname == values.route ? `${styles.web_active}` : `${styles.web_unactive}`}>
+										{`${values.route} - ${router.pathname == values.route ? `${styles.web_active}` : `${styles.web_unactive}`}`}
+									</Link>
+								)
+							})}
+							{/* <Link href="/contact" className={`py-4 px-2 ${router.pathname == '/contact' ? 'text-green-500 border-b-4 border-green-500 font-semibold' : 'text-gray-500 font-semibold' }`}>Contact</Link>
 							<Link href="/faq" className={`py-4 px-2 ${router.pathname == '/faq' ? 'text-green-500 border-b-4 border-green-500 font-semibold' : 'text-gray-500' } font-semibold hover:text-green-500 transition duration-300`}>Frequently Asked Questions</Link>
 							<Link href="/schedule" className={`py-4 px-2 ${router.pathname == '/schedule' ? 'text-green-500 border-b-4 border-green-500 font-semibold' : 'text-gray-500' } font-semibold hover:text-green-500 transition duration-300`}>Schedule a Session</Link>
-							<Link href="/team" className={`py-4 px-2 ${router.pathname == '/team' ? 'text-green-500 border-b-4 border-green-500 font-semibold' : 'text-gray-500' } font-semibold hover:text-green-500 transition duration-300`} >Our Team</Link>
+							<Link href="/team" className={`py-4 px-2 ${router.pathname == '/team' ? 'text-green-500 border-b-4 border-green-500 font-semibold' : 'text-gray-500' } font-semibold hover:text-green-500 transition duration-300`} >Our Team</Link> */}
 						</div>
 					</div>
 					<div className="hidden md:flex items-center space-x-3 ">
